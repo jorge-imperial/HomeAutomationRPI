@@ -13,7 +13,7 @@ Components:
 Soon
 
 
-## Software installation**
+## Software installation
 
 The project uses a daemonized python script to control the relays via GPIO. 
 
