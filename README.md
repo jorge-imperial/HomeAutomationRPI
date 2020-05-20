@@ -5,9 +5,9 @@ This project uses a Raspberry PI 3 and a relay board to control devices by openi
 
 Components:
 
-- Raspberry PI 3 (Raspbian/Debian 10.3)
-- Four relay module (Keyestudio 4-channel 5V relay)
-- Pemenol OLED Display module 128x64
+- [Raspberry PI 3 Model B (Raspbian/Debian 10.3)](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/)
+- [Four relay module (Keyestudio 4-channel 5V relay)](https://www.keyestudio.com/free-shipping-2016-new-keyestudio-4-channel-5v-relay-module-for-arduino-p0190.html)
+- [Pemenol OLED Display module 128x64](https://www.amazon.com/PEMENOL-Display-0-96inch-Raspberry-Microcontroller/dp/B07F3KY8NF)
 
 ## Wiring
 Soon
