@@ -10,7 +10,8 @@ Components:
 - [Pemenol OLED Display module 128x64](https://www.amazon.com/PEMENOL-Display-0-96inch-Raspberry-Microcontroller/dp/B07F3KY8NF)
 
 ## Wiring
-Soon
+
+![Completed board](https://github.com/jorge-imperial/HomeAutomationRPI/raw/master/images/board1.jpg)
 
 
 ## Software installation
