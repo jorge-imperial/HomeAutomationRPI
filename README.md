@@ -48,8 +48,8 @@ Currently, the daemon opens a socket on port 9000 and listens for commands. Thes
 
 
 ```
-{ set: { relay: n, state:  }}      Set relay state to 0 or 1. The effect will depende on how the relay
-                                    is wired (normally open or normally closed)
+{ set: { relay: n, state: s }}     Set relay state to 0 or 1. The effect will depende on how the relay
+                                   is wired (normally open or normally closed)
 { get: { "relay" : n }}            Get the current state of the relay.
 { get:  "status" }                 Get the status and configuration of the device.
 { get:  "config" }
