@@ -17,6 +17,21 @@ const StatusSchema = {
     name: 'Status',
     properties: {
         // required
+        _id: 'string',
+        _partition: 'string',
+        relays: 'string',       // <-- sending a json with the state
+        timestamp: 'int',
+        // not required '?'
+        status: 'int?'
+    },
+    primaryKey: '_id',
+};
+
+
+const StatusHistorySchema = {
+    name: 'StatusHistory',
+    properties: {
+        // required
         _id: 'objectId',
         _partition: 'string',
         relays: 'string',       // <-- sending a json with the state
@@ -27,5 +42,8 @@ const StatusSchema = {
     primaryKey: '_id',
 };
 
+
+
 exports.StatusSchema = StatusSchema;
 exports.CommandsSchema = CommandsSchema;
+exports.StatusHistorySchema = StatusHistorySchema;
