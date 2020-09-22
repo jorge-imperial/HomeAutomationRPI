@@ -1,5 +1,4 @@
 const Realm  = require("realm");
-const bson   = require("bson");
 const config = require("./config");
 const schemas = require("./schemas");
 const net = require('net');
@@ -31,17 +30,18 @@ async function  getSprinklerStatus(realm) {
         console.log(data.toString());
         sprinklers.end();
 
-        // update
+        // Upsert
         try {
             const timeNow = Date.now();
             realm.write( () => {
                 const newStatus = realm.create( "Status", {
-                    _id: new bson.ObjectID(),
+                    _id: CONTROLLER_ID,
                     _partition: CONTROLLER_ID,
-                    relays:  data.toString(),
-                    timestamp: timeNow,
-                    status: 0
-                });
+                    relays:  data.toString(),   // TODO: if this string did not have a timestamp and if the 
+                    timestamp: timeNow,         // timestamp is zero, the sync is much more efficient. 
+                    status: 0                   // Traffic would be only when something changed in the relays.
+                }, 
+                "modified"); 
                 console.log('Wrote status');
             });
         }
