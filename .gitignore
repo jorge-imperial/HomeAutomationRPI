@@ -1,7 +1,13 @@
-./node_modules/**
+node_modules/**
+realm-object-server/**
+src/realm-object-server/**
 .idea/
 .vscode/
 default.realm
 default.realm.lock
+.DS_Store
 ./default.realm.management/**
 package-lock.json
+src/delete-all-status.js
+src/config.js.dev
+src/list-status.js
