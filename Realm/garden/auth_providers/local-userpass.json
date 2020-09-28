@@ -1,0 +1,13 @@
+{
+    "id": "5f4ee4466bb52ce5ecefec25",
+    "name": "local-userpass",
+    "type": "local-userpass",
+    "config": {
+        "autoConfirm": true,
+        "resetPasswordSubject": "A link to reset your password.",
+        "resetPasswordUrl": "https://ausfaller.com/resetpwd",
+        "runConfirmationFunction": false,
+        "runResetFunction": ""
+    },
+    "disabled": false
+}

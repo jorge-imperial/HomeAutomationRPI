@@ -1,0 +1,42 @@
+{
+    "collection": "Status",
+    "database": "irrigation",
+    "id": "5f6a61a62efc19f33b6a09bc",
+    "roles": [
+        {
+            "name": "default",
+            "apply_when": {},
+            "insert": true,
+            "delete": true,
+            "search": true,
+            "additional_fields": {}
+        }
+    ],
+    "schema": {
+        "bsonType": "object",
+        "properties": {
+            "_id": {
+                "bsonType": "string"
+            },
+            "_partition": {
+                "bsonType": "string"
+            },
+            "relays": {
+                "bsonType": "string"
+            },
+            "status": {
+                "bsonType": "long"
+            },
+            "timestamp": {
+                "bsonType": "long"
+            }
+        },
+        "required": [
+            "_id",
+            "_partition",
+            "relays",
+            "timestamp"
+        ],
+        "title": "Status"
+    }
+}

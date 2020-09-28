@@ -1,0 +1,24 @@
+{
+    "id": "5f4edfa64d10309d3d4aecf5",
+    "name": "mongodb-atlas",
+    "type": "mongodb-atlas",
+    "config": {
+        "clusterName": "RealmCluster",
+        "readPreference": "primary",
+        "sync": {
+            "state": "enabled",
+            "database_name": "irrigation",
+            "partition": {
+                "key": "_partition",
+                "type": "string",
+                "required": true,
+                "permissions": {
+                    "read": {},
+                    "write": {}
+                }
+            }
+        },
+        "wireProtocolEnabled": false
+    },
+    "version": 1
+}

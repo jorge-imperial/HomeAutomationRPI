@@ -1,0 +1,36 @@
+{
+    "collection": "Commands",
+    "database": "irrigation",
+    "id": "5f50073e7c1108c62b2d1abd",
+    "schema": {
+        "bsonType": "object",
+        "properties": {
+            "_id": {
+                "bsonType": "objectId"
+            },
+            "_partition": {
+                "bsonType": "string"
+            },
+            "command": {
+                "bsonType": "string"
+            },
+            "status": {
+                "bsonType": "long"
+            },
+            "timestamp": {
+                "bsonType": "long"
+            },
+            "zone_id": {
+                "bsonType": "string"
+            }
+        },
+        "required": [
+            "_id",
+            "_partition",
+            "command",
+            "timestamp",
+            "zone_id"
+        ],
+        "title": "Commands"
+    }
+}
