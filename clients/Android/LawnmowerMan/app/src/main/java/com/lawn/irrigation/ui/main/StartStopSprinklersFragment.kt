@@ -188,8 +188,4 @@ class StartStopSprinklersFragment : Fragment()  {
             c.timestamp = System.currentTimeMillis()
         }
     }
-
-
-
-
 }
