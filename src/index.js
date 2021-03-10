@@ -15,9 +15,8 @@ const appConfig = {
     id: REALM_APP_ID,
     timeout: 10000,
 };
-const app = new Realm.App(appConfig);
 
-Realm.Sync.setLogLevel("debug")
+const app = new Realm.App(appConfig);
 
 async function  getSprinklerStatus(realm) {
 
@@ -109,7 +108,8 @@ function listener(commands, changes) {
 
 async function  run() {
 
-    await logIn(USER, PWD);
+    await app.logIn( new Realm.Credentials.emailPassword(USER,PWD));
+
     const realm = await Realm.open({
         schema: [schemas.StatusSchema, schemas.CommandsSchema],
         sync: {
