@@ -15,7 +15,11 @@ Components:
 
 ## Wiring
 
-![Completed board](https://github.com/jorge-imperial/HomeAutomationRPI/raw/master/images/board1.jpg)
+
+![Wiring diagram](https://github.com/jorge-imperial/HomeAutomationRPI/raw/dev/images/pinout-v2.png)
+
+
+![Completed board](https://github.com/jorge-imperial/HomeAutomationRPI/raw/dev/images/controller2.png)
 
 
 ## Software installation
