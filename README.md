@@ -5,7 +5,7 @@ This project uses a Raspberry PI 3 and a relay board to control devices by openi
 
 This project can be easily extended to start and stop other home appliances, doors, etc. by using a relay board with more outputs, or by adding more boards.
 
-The status of the device is being saved in a free tier [MongoDB database in Atlas](https://www.mongodb.com/cloud/atlas), using [MongoDB Realm](https://www.mongodb.com/realm). This makes it very easy to  write applications for monitoring and control, like the companion [Android Project]()
+The status of the device is being saved in a free tier [MongoDB database in Atlas](https://www.mongodb.com/cloud/atlas), using [MongoDB Realm](https://www.mongodb.com/realm). This makes it very easy to  write applications for monitoring and control, like the companion [Android Project](https://github.com/jorge-imperial/HomeAutomationRPI/tree/dev/clients/Android/LawnmowerMan)
 
 Components:
 
