@@ -1,7 +1,9 @@
 const Realm  = require("realm");
 const config = require("./config");
 const schemas = require("./schemas");
-const net = require('net');
+ 
+const http = require('http');
+
 
 const STATUS_TIMEOUT = config.status_timeout;
 const HOST = config.daemon_host;
@@ -15,48 +17,63 @@ const appConfig = {
     id: REALM_APP_ID,
     timeout: 10000,
 };
-
 const app = new Realm.App(appConfig);
 
+ 
 async function  getSprinklerStatus(realm) {
 
-    const sprinklers = net.connect({port: PORT, host: HOST},
-        function () {
-             console.log('Connected to sprinklers!')
-        });
-    sprinklers.write('{"get":"config"}');
-    sprinklers.on('data', function(data) {
-        console.log(data.toString());
-        sprinklers.end();
+    const options = {
+        hostname: HOST,
+        port: PORT,
+        path: '/status',
+        method: 'GET'
+      }
 
-        // Upsert
-        try {
-            const timeNow = Date.now();
-            realm.write( () => {
-                const newStatus = realm.create( "Status", {
-                    _id: CONTROLLER_ID,
-                    _partition: CONTROLLER_ID,
-                    relays:  data.toString(),   // TODO: if this string did not have a timestamp and if the 
-                    timestamp: timeNow,         // timestamp is zero, the sync is much more efficient. 
-                    status: 0                   // Traffic would be only when something changed in the relays.
-                }, 
-                "modified"); 
-                console.log('Wrote status');
-            });
-        }
-        catch (e) {
-            console.error('Could not send/parse data from sprinklers.');
-        }
-    });
-    sprinklers.on('end', function() {
-        console.log('Disconnected from sprinklers.')
-    });
+    const req = http.request(options, res => {
+        console.log(`statusCode: ${res.statusCode}`)
+    
+        res.on('data', d => {
+            process.stdout.write(d);
+            console.log(d.toString());
+             // Upsert
+            try {
+                const timeNow = Date.now();
+                realm.write( () => {
+
+                    const newStatus = realm.create( "Status", {
+                        _id: CONTROLLER_ID + '-' + timeNow,
+                        _partition: CONTROLLER_ID,
+                        relays:  d.toString(),      // 
+                        timestamp: timeNow,         // 
+                        status: 0                   //  
+                    }, 
+                    "modified"); 
+                    console.log('Wrote status at ' + timeNow);
+                    req.end();
+
+                });
+            }
+            catch (e) {
+                console.error('Could not write status data from sprinklers.');
+                console.error(e);
+            }
+        })
+    })
+
+    req.on('error', error => {
+        console.error(error)
+      })
+      
+    req.end()
 }
+ 
+
 
 
 
 async function  sendCommandToSprinkler(command) {
 
+    /*
     const sprinklers = net.connect({port: PORT, host: HOST},
         function () {
              console.log('Connected to sprinklers!')
@@ -69,6 +86,7 @@ async function  sendCommandToSprinkler(command) {
     sprinklers.on('end', function() {
         console.log('Disconnected from sprinklers.')
     });
+    */
 }
 
 
@@ -106,10 +124,10 @@ function listener(commands, changes) {
     });
 }
 
+
 async function  run() {
 
-    await app.logIn( new Realm.Credentials.emailPassword(USER,PWD));
-
+    await logIn(USER, PWD);
     const realm = await Realm.open({
         schema: [schemas.StatusSchema, schemas.CommandsSchema],
         sync: {
@@ -121,8 +139,8 @@ async function  run() {
     setInterval(getSprinklerStatus, STATUS_TIMEOUT, realm);
 
     // New commands?
-    const commands = realm.objects("Commands");
-    commands.addListener(listener);
+    //const commands = realm.objects("Commands");
+    //commands.addListener(listener);
 
 }
 
