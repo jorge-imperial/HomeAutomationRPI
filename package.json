@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "bson": "^4.0.4",
-    "realm": "^10.0.0-beta.11"
+    "realm": "^10.6.1"
   },
   "devDependencies": {
     "eslint": "^7.4.0",
