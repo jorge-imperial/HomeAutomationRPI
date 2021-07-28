@@ -22,8 +22,7 @@ RELAYS = [
 
 /**
  *  The status schema defined in Realm
- 
-{
+ {
   "title": "Status",
   "required": [
     "_id",
@@ -40,6 +39,7 @@ RELAYS = [
     "relays": {
       "bsonType": "array",
       "items": {
+        "title": "Relay",
         "bsonType": "object",
         "properties": {
           "gpio": {
@@ -52,14 +52,14 @@ RELAYS = [
             "bsonType": "int"
           },
           "state": {
-            "bsonType": "int"
+            "bsonType": "bool"
           },
           "type": {
             "bsonType": "string"
           },
           "usage": {
             "bsonType": "string"
-          }
+          } 
         }
       }
     },
@@ -72,14 +72,31 @@ RELAYS = [
   }
 }
 
+
+
 */
+
+
+
+const RelaySchema= {
+  name: "Relay",
+  embedded: true,
+  properties: {
+      gpio: "int?",
+      pin: "int?",
+      type: "string?",
+      state: "bool?",
+      usage: "string?",
+      name: "string?"
+  }
+};
 
 const StatusSchema = {
     name : "Status",
     properties : {
         _id: "objectId",
         _partition: "string",
-        //relays : "Relay[]",
+        relays : { type: "list", objectType: "Relay" }, 
         timestamp: "int",
         status: "int?"
     },
@@ -87,20 +104,8 @@ const StatusSchema = {
 };
 
 
-const Relays = {
-    name: "Relay",
-    embedded: true,
-    properties: {
-        gpio: "int?",
-        pin: "int?",
-        type: "string?",
-        state: "int?",
-        use: "string?",
-        name: "string?"
-    }
-};
-
-
+ 
+exports.RelaySchema = RelaySchema;
 exports.StatusSchema = StatusSchema;
 
  

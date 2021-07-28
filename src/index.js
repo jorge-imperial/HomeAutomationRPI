@@ -26,22 +26,26 @@ async function  getSprinklerStatus() {
                 console.log(`Got status: ${d.toString()}`);
 
                 const obj = JSON.parse(d.toString());
-                const relay_array = [];
-                obj.forEach((v) => {
-                    // {"gpio":2,"name":"sprinkler0","state":false,"use":"valve"}
-                    relay_array.push({
-                        gpio: v.gpio,
-                        name: v.name,
-                        state: (v.state) ? 1 : 0,
-                        use: v.use
-                    });
-                });
 
                 realm.write(() => {
+
+                    relay_array = [];
+                    obj.forEach(element => {
+                        const r =   {
+                            gpio: element.gpio,
+                            pin: element.pin,
+                            type: element.type,
+                            state: element.state,
+                            use: element.use,
+                            name: element.name
+                        };
+                        relay_array = relay_array.concat(r);
+                    });
+
                     const current_status = realm.create("Status", {
                         _partition: config.controller_id,
                         timestamp: timeNow,
-                        //relays: relay_array,
+                        relays: relay_array,
                         _id: new BSON.ObjectID,
                         status: 0
                     });
@@ -68,7 +72,7 @@ async function run() {
     const user = await users.getAuthedUser();
 
     const Realm_Config =  {
-        schema: [schemas.StatusSchema],
+        schema: [schemas.StatusSchema, schemas.RelaySchema],
         sync: {
             user: user,
             partitionValue: config.controller_id,
@@ -83,9 +87,6 @@ async function run() {
     //const commands = realm.objects("Commands");
     //commands.addListener(listener);
 }
-
-
-
 
 
 run().catch((err) => {
